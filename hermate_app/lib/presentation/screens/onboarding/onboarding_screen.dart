@@ -13,7 +13,15 @@ class OnboardingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/onboarding.png', height: 280),
+            Image.asset(
+              'assets/images/onboarding.png',
+              height: 280,
+              errorBuilder: (_, __, ___) => const Icon(
+                Icons.favorite,
+                size: 96,
+                color: AppColors.primary,
+              ),
+            ),
             const SizedBox(height: 40),
             const Text(
               "Track your cycle with confidence 💗",
