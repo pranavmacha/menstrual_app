@@ -77,14 +77,30 @@ class _CycleBasicsContent extends StatelessWidget {
           _TableCard(
             headers: const ['Phase', 'Timing', 'Hormones', 'What happens'],
             rows: const [
-              ['Menstrual', 'Days 1–5', 'Low estrogen & progesterone',
-                'The uterine lining sheds, causing bleeding.'],
-              ['Follicular', 'Days 1–13', 'Rising estrogen',
-                'FSH stimulates follicles in the ovaries to grow.'],
-              ['Ovulation', 'Day 14', 'Estrogen peaks, LH surge',
-                'A mature egg is released from the ovary.'],
-              ['Luteal', 'Days 15–28', 'Rising progesterone',
-                'The corpus luteum produces progesterone to support a potential pregnancy.'],
+              [
+                'Menstrual',
+                'Days 1–5',
+                'Low estrogen & progesterone',
+                'The uterine lining sheds, causing bleeding.',
+              ],
+              [
+                'Follicular',
+                'Days 1–13',
+                'Rising estrogen',
+                'FSH stimulates follicles in the ovaries to grow.',
+              ],
+              [
+                'Ovulation',
+                'Day 14',
+                'Estrogen peaks, LH surge',
+                'A mature egg is released from the ovary.',
+              ],
+              [
+                'Luteal',
+                'Days 15–28',
+                'Rising progesterone',
+                'The corpus luteum produces progesterone to support a potential pregnancy.',
+              ],
             ],
           ),
           const SizedBox(height: 16),
@@ -242,7 +258,7 @@ class _EcoFriendlyContent extends StatelessWidget {
               _InfoCard(
                 title: 'Cost savings',
                 body:
-                    'A quality menstrual cup can last 5–10 years and save more than $1,500 over its lifespan.',
+                    'A quality menstrual cup can last 5-10 years and save more than \$1,500 over its lifespan.',
               ),
               _InfoCard(
                 title: 'Health benefits',
@@ -258,28 +274,35 @@ class _EcoFriendlyContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           _TableCard(
-            headers: const ['Product', 'Lifespan', 'Cost', 'Eco rating', 'Pros', 'Cons'],
+            headers: const [
+              'Product',
+              'Lifespan',
+              'Cost',
+              'Eco rating',
+              'Pros',
+              'Cons',
+            ],
             rows: const [
               [
                 'Menstrual cup',
-                '5–10 years',
-                '$25–40',
+                '5-10 years',
+                '\$25-40',
                 'Excellent',
                 'Reusable, cost-effective, long-lasting',
                 'Learning curve and requires cleaning.',
               ],
               [
                 'Period underwear',
-                '2–3 years',
-                '$15–35 per pair',
+                '2-3 years',
+                '\$15-35 per pair',
                 'Excellent',
                 'Comfortable and easy to wear',
                 'Higher upfront cost and needs washing.',
               ],
               [
                 'Reusable pads',
-                '3–5 years',
-                '$10–25 per set',
+                '3-5 years',
+                '\$10-25 per set',
                 'Excellent',
                 'Soft, breathable, and customizable',
                 'Need frequent washing and multiple sets.',
@@ -287,7 +310,7 @@ class _EcoFriendlyContent extends StatelessWidget {
               [
                 'Organic cotton pads',
                 'Single-use',
-                '$5–8 per box',
+                '\$5-8 per box',
                 'Good',
                 'Biodegradable and chemical-free',
                 'Still disposable with ongoing costs.',
@@ -295,7 +318,7 @@ class _EcoFriendlyContent extends StatelessWidget {
               [
                 'Organic tampons',
                 'Single-use',
-                '$6–10 per box',
+                '\$6-10 per box',
                 'Good',
                 'Biodegradable materials',
                 'Disposable and needs regular restocking.',
@@ -331,15 +354,18 @@ class _MythsFactsContent extends StatelessWidget {
       },
       {
         'myth': 'Periods sync when people spend time together.',
-        'fact': 'There is no scientific evidence that cycles truly synchronize.',
+        'fact':
+            'There is no scientific evidence that cycles truly synchronize.',
       },
       {
         'myth': 'You lose a lot of blood during your period.',
-        'fact': 'Most people lose only 2–3 tablespoons (30–40 ml) of menstrual fluid.',
+        'fact':
+            'Most people lose only 2–3 tablespoons (30–40 ml) of menstrual fluid.',
       },
       {
         'myth': 'You can’t get pregnant during your period.',
-        'fact': 'Pregnancy is still possible because sperm can survive up to five days.',
+        'fact':
+            'Pregnancy is still possible because sperm can survive up to five days.',
       },
       {
         'myth': 'Tampons can get lost inside you.',
@@ -347,27 +373,33 @@ class _MythsFactsContent extends StatelessWidget {
       },
       {
         'myth': 'PMS is just in your head.',
-        'fact': 'Premenstrual syndrome is real and affects roughly 75% of menstruating people.',
+        'fact':
+            'Premenstrual syndrome is real and affects roughly 75% of menstruating people.',
       },
       {
         'myth': 'Irregular periods always mean something is wrong.',
-        'fact': 'Cycles can vary, especially during the teen years or perimenopause. Sudden changes are worth discussing with a doctor.',
+        'fact':
+            'Cycles can vary, especially during the teen years or perimenopause. Sudden changes are worth discussing with a doctor.',
       },
       {
         'myth': 'You shouldn’t wash your hair on your period.',
-        'fact': 'There is no scientific basis—good hygiene is especially helpful.',
+        'fact':
+            'There is no scientific basis—good hygiene is especially helpful.',
       },
       {
         'myth': 'Period blood is dirty.',
-        'fact': 'Menstrual fluid is a mix of blood, uterine tissue, and secretions. It is not toxic.',
+        'fact':
+            'Menstrual fluid is a mix of blood, uterine tissue, and secretions. It is not toxic.',
       },
       {
         'myth': 'Severe pain is normal.',
-        'fact': 'Intense pain may signal conditions such as endometriosis. Seek medical advice.',
+        'fact':
+            'Intense pain may signal conditions such as endometriosis. Seek medical advice.',
       },
       {
         'myth': 'Cooking certain foods or using tampons affects virginity.',
-        'fact': 'These are cultural myths. Menstruation does not change your ability to cook, and virginity is a social concept.',
+        'fact':
+            'These are cultural myths. Menstruation does not change your ability to cook, and virginity is a social concept.',
       },
     ];
 
@@ -378,10 +410,7 @@ class _MythsFactsContent extends StatelessWidget {
         children: [
           const _SectionTitle('Myths vs Facts'),
           ...myths.map(
-            (item) => _MythFactCard(
-              myth: item['myth']!,
-              fact: item['fact']!,
-            ),
+            (item) => _MythFactCard(myth: item['myth']!, fact: item['fact']!),
           ),
           const SizedBox(height: 20),
           const _InfoCard(
@@ -541,10 +570,7 @@ class _SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -554,10 +580,7 @@ class _InfoCard extends StatelessWidget {
   final String title;
   final String body;
 
-  const _InfoCard({
-    required this.title,
-    required this.body,
-  });
+  const _InfoCard({required this.title, required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -571,16 +594,10 @@ class _InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
-            Text(
-              body,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(body, style: const TextStyle(fontSize: 14, height: 1.4)),
           ],
         ),
       ),
@@ -655,10 +672,7 @@ class _CalloutCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Text(
-                    body,
-                    style: const TextStyle(fontSize: 14, height: 1.4),
-                  ),
+                  Text(body, style: const TextStyle(fontSize: 14, height: 1.4)),
                 ],
               ),
             ),
@@ -673,10 +687,7 @@ class _TableCard extends StatelessWidget {
   final List<String> headers;
   final List<List<String>> rows;
 
-  const _TableCard({
-    required this.headers,
-    required this.rows,
-  });
+  const _TableCard({required this.headers, required this.rows});
 
   @override
   Widget build(BuildContext context) {
@@ -825,10 +836,7 @@ class _TagChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       backgroundColor: AppColors.accent.withOpacity(0.6),
-      label: Text(
-        label,
-        style: const TextStyle(fontSize: 13),
-      ),
+      label: Text(label, style: const TextStyle(fontSize: 13)),
     );
   }
 }
@@ -837,10 +845,7 @@ class _MythFactCard extends StatelessWidget {
   final String myth;
   final String fact;
 
-  const _MythFactCard({
-    required this.myth,
-    required this.fact,
-  });
+  const _MythFactCard({required this.myth, required this.fact});
 
   @override
   Widget build(BuildContext context) {
@@ -861,23 +866,14 @@ class _MythFactCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(
-              myth,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(myth, style: const TextStyle(fontSize: 14, height: 1.4)),
             const SizedBox(height: 12),
             const Text(
               'Fact',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 4),
-            Text(
-              fact,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(fact, style: const TextStyle(fontSize: 14, height: 1.4)),
           ],
         ),
       ),
