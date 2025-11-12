@@ -84,11 +84,13 @@ class _CycleBasicsContent extends StatelessWidget {
                   _DetailField(label: 'Timing', value: 'Days 1–5'),
                   _DetailField(
                     label: 'Hormones',
-                    value: 'Estrogen and progesterone are at their lowest levels.',
+                    value:
+                        'Estrogen and progesterone are at their lowest levels.',
                   ),
                   _DetailField(
                     label: 'What happens',
-                    value: 'The uterine lining sheds, leading to menstrual bleeding.',
+                    value:
+                        'The uterine lining sheds, leading to menstrual bleeding.',
                   ),
                 ],
               ),
@@ -98,11 +100,13 @@ class _CycleBasicsContent extends StatelessWidget {
                   _DetailField(label: 'Timing', value: 'Days 1–13'),
                   _DetailField(
                     label: 'Hormones',
-                    value: 'Estrogen rises while follicle-stimulating hormone activates ovarian follicles.',
+                    value:
+                        'Estrogen rises while follicle-stimulating hormone activates ovarian follicles.',
                   ),
                   _DetailField(
                     label: 'What happens',
-                    value: 'Follicles in the ovaries mature in preparation for ovulation.',
+                    value:
+                        'Follicles in the ovaries mature in preparation for ovulation.',
                   ),
                 ],
               ),
@@ -112,11 +116,13 @@ class _CycleBasicsContent extends StatelessWidget {
                   _DetailField(label: 'Timing', value: 'Around Day 14'),
                   _DetailField(
                     label: 'Hormones',
-                    value: 'Estrogen peaks and triggers a luteinizing hormone surge.',
+                    value:
+                        'Estrogen peaks and triggers a luteinizing hormone surge.',
                   ),
                   _DetailField(
                     label: 'What happens',
-                    value: 'A mature egg is released from the ovary and is available for fertilization.',
+                    value:
+                        'A mature egg is released from the ovary and is available for fertilization.',
                   ),
                 ],
               ),
@@ -130,7 +136,8 @@ class _CycleBasicsContent extends StatelessWidget {
                   ),
                   _DetailField(
                     label: 'What happens',
-                    value: 'The corpus luteum produces progesterone to support a potential pregnancy.',
+                    value:
+                        'The corpus luteum produces progesterone to support a potential pregnancy.',
                   ),
                 ],
               ),
@@ -291,7 +298,7 @@ class _EcoFriendlyContent extends StatelessWidget {
               _InfoCard(
                 title: 'Cost savings',
                 body:
-                    'A quality menstrual cup can last 5–10 years and save more than $1,500 over its lifespan.',
+                    'A quality menstrual cup can last 5-10 years and save more than \$1,500 over its lifespan.',
               ),
               _InfoCard(
                 title: 'Health benefits',
@@ -318,11 +325,13 @@ class _EcoFriendlyContent extends StatelessWidget {
                   _DetailField(label: 'Eco rating', value: 'Excellent'),
                   _DetailField(
                     label: 'Pros',
-                    value: 'Reusable, cost-effective, and long-lasting for heavy or light flows.',
+                    value:
+                        'Reusable, cost-effective, and long-lasting for heavy or light flows.',
                   ),
                   _DetailField(
                     label: 'Considerations',
-                    value: 'Requires cleaning and a bit of practice to insert comfortably.',
+                    value:
+                        'Requires cleaning and a bit of practice to insert comfortably.',
                   ),
                 ],
               ),
@@ -334,11 +343,13 @@ class _EcoFriendlyContent extends StatelessWidget {
                   _DetailField(label: 'Eco rating', value: 'Excellent'),
                   _DetailField(
                     label: 'Pros',
-                    value: 'Comfortable, leak-resistant, and easy to wear without extra products.',
+                    value:
+                        'Comfortable, leak-resistant, and easy to wear without extra products.',
                   ),
                   _DetailField(
                     label: 'Considerations',
-                    value: 'Higher upfront cost and needs routine washing between wears.',
+                    value:
+                        'Higher upfront cost and needs routine washing between wears.',
                   ),
                 ],
               ),
@@ -350,11 +361,13 @@ class _EcoFriendlyContent extends StatelessWidget {
                   _DetailField(label: 'Eco rating', value: 'Excellent'),
                   _DetailField(
                     label: 'Pros',
-                    value: 'Soft, breathable fabrics with customizable absorbency levels.',
+                    value:
+                        'Soft, breathable fabrics with customizable absorbency levels.',
                   ),
                   _DetailField(
                     label: 'Considerations',
-                    value: "Need frequent washing and you'll want multiple sets for rotation.",
+                    value:
+                        "Need frequent washing and you'll want multiple sets for rotation.",
                   ),
                 ],
               ),
@@ -366,11 +379,13 @@ class _EcoFriendlyContent extends StatelessWidget {
                   _DetailField(label: 'Eco rating', value: 'Good'),
                   _DetailField(
                     label: 'Pros',
-                    value: 'Biodegradable, chlorine-free materials that feel similar to regular pads.',
+                    value:
+                        'Biodegradable, chlorine-free materials that feel similar to regular pads.',
                   ),
                   _DetailField(
                     label: 'Considerations',
-                    value: 'Still disposable, so there is ongoing cost and waste.',
+                    value:
+                        'Still disposable, so there is ongoing cost and waste.',
                   ),
                 ],
               ),
@@ -382,11 +397,13 @@ class _EcoFriendlyContent extends StatelessWidget {
                   _DetailField(label: 'Eco rating', value: 'Good'),
                   _DetailField(
                     label: 'Pros',
-                    value: 'Made with biodegradable fibers and familiar to tampon users.',
+                    value:
+                        'Made with biodegradable fibers and familiar to tampon users.',
                   ),
                   _DetailField(
                     label: 'Considerations',
-                    value: 'Disposable product that still needs restocking and proper disposal.',
+                    value:
+                        'Disposable product that still needs restocking and proper disposal.',
                   ),
                 ],
               ),
@@ -421,15 +438,18 @@ class _MythsFactsContent extends StatelessWidget {
       },
       {
         'myth': 'Periods sync when people spend time together.',
-        'fact': 'There is no scientific evidence that cycles truly synchronize.',
+        'fact':
+            'There is no scientific evidence that cycles truly synchronize.',
       },
       {
         'myth': 'You lose a lot of blood during your period.',
-        'fact': 'Most people lose only 2–3 tablespoons (30–40 ml) of menstrual fluid.',
+        'fact':
+            'Most people lose only 2–3 tablespoons (30–40 ml) of menstrual fluid.',
       },
       {
         'myth': 'You can’t get pregnant during your period.',
-        'fact': 'Pregnancy is still possible because sperm can survive up to five days.',
+        'fact':
+            'Pregnancy is still possible because sperm can survive up to five days.',
       },
       {
         'myth': 'Tampons can get lost inside you.',
@@ -437,27 +457,33 @@ class _MythsFactsContent extends StatelessWidget {
       },
       {
         'myth': 'PMS is just in your head.',
-        'fact': 'Premenstrual syndrome is real and affects roughly 75% of menstruating people.',
+        'fact':
+            'Premenstrual syndrome is real and affects roughly 75% of menstruating people.',
       },
       {
         'myth': 'Irregular periods always mean something is wrong.',
-        'fact': 'Cycles can vary, especially during the teen years or perimenopause. Sudden changes are worth discussing with a doctor.',
+        'fact':
+            'Cycles can vary, especially during the teen years or perimenopause. Sudden changes are worth discussing with a doctor.',
       },
       {
         'myth': 'You shouldn’t wash your hair on your period.',
-        'fact': 'There is no scientific basis—good hygiene is especially helpful.',
+        'fact':
+            'There is no scientific basis—good hygiene is especially helpful.',
       },
       {
         'myth': 'Period blood is dirty.',
-        'fact': 'Menstrual fluid is a mix of blood, uterine tissue, and secretions. It is not toxic.',
+        'fact':
+            'Menstrual fluid is a mix of blood, uterine tissue, and secretions. It is not toxic.',
       },
       {
         'myth': 'Severe pain is normal.',
-        'fact': 'Intense pain may signal conditions such as endometriosis. Seek medical advice.',
+        'fact':
+            'Intense pain may signal conditions such as endometriosis. Seek medical advice.',
       },
       {
         'myth': 'Cooking certain foods or using tampons affects virginity.',
-        'fact': 'These are cultural myths. Menstruation does not change your ability to cook, and virginity is a social concept.',
+        'fact':
+            'These are cultural myths. Menstruation does not change your ability to cook, and virginity is a social concept.',
       },
     ];
 
@@ -468,10 +494,7 @@ class _MythsFactsContent extends StatelessWidget {
         children: [
           const _SectionTitle('Myths vs Facts'),
           ...myths.map(
-            (item) => _MythFactCard(
-              myth: item['myth']!,
-              fact: item['fact']!,
-            ),
+            (item) => _MythFactCard(myth: item['myth']!, fact: item['fact']!),
           ),
           const SizedBox(height: 20),
           const _InfoCard(
@@ -550,15 +573,18 @@ class _NutritionContent extends StatelessWidget {
                 fields: [
                   _DetailField(
                     label: 'Sources',
-                    value: 'Beef, chicken liver, seafood, and other animal proteins.',
+                    value:
+                        'Beef, chicken liver, seafood, and other animal proteins.',
                   ),
                   _DetailField(
                     label: 'Why it helps',
-                    value: 'Absorbs easily and quickly replenishes iron lost during menstruation.',
+                    value:
+                        'Absorbs easily and quickly replenishes iron lost during menstruation.',
                   ),
                   _DetailField(
                     label: 'Tip',
-                    value: 'Pair with fiber-rich sides like veggies or whole grains for balance.',
+                    value:
+                        'Pair with fiber-rich sides like veggies or whole grains for balance.',
                   ),
                 ],
               ),
@@ -567,15 +593,18 @@ class _NutritionContent extends StatelessWidget {
                 fields: [
                   _DetailField(
                     label: 'Sources',
-                    value: 'Spinach, lentils, beans, tofu, pumpkin seeds, and fortified cereals.',
+                    value:
+                        'Spinach, lentils, beans, tofu, pumpkin seeds, and fortified cereals.',
                   ),
                   _DetailField(
                     label: 'Why it helps',
-                    value: 'Plant-based iron supports energy and is great for vegetarian or vegan diets.',
+                    value:
+                        'Plant-based iron supports energy and is great for vegetarian or vegan diets.',
                   ),
                   _DetailField(
                     label: 'Tip',
-                    value: 'Eat with vitamin C foods such as citrus, bell peppers, or strawberries to boost absorption.',
+                    value:
+                        'Eat with vitamin C foods such as citrus, bell peppers, or strawberries to boost absorption.',
                   ),
                 ],
               ),
@@ -656,10 +685,7 @@ class _SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -669,10 +695,7 @@ class _InfoCard extends StatelessWidget {
   final String title;
   final String body;
 
-  const _InfoCard({
-    required this.title,
-    required this.body,
-  });
+  const _InfoCard({required this.title, required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -686,16 +709,10 @@ class _InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
-            Text(
-              body,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(body, style: const TextStyle(fontSize: 14, height: 1.4)),
           ],
         ),
       ),
@@ -770,10 +787,7 @@ class _CalloutCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Text(
-                    body,
-                    style: const TextStyle(fontSize: 14, height: 1.4),
-                  ),
+                  Text(body, style: const TextStyle(fontSize: 14, height: 1.4)),
                 ],
               ),
             ),
@@ -788,20 +802,14 @@ class _DetailField {
   final String label;
   final String value;
 
-  const _DetailField({
-    required this.label,
-    required this.value,
-  });
+  const _DetailField({required this.label, required this.value});
 }
 
 class _DetailCard extends StatelessWidget {
   final String title;
   final List<_DetailField> fields;
 
-  const _DetailCard({
-    required this.title,
-    required this.fields,
-  });
+  const _DetailCard({required this.title, required this.fields});
 
   @override
   Widget build(BuildContext context) {
@@ -928,10 +936,7 @@ class _TagChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       backgroundColor: AppColors.accent.withOpacity(0.6),
-      label: Text(
-        label,
-        style: const TextStyle(fontSize: 13),
-      ),
+      label: Text(label, style: const TextStyle(fontSize: 13)),
     );
   }
 }
@@ -940,10 +945,7 @@ class _MythFactCard extends StatelessWidget {
   final String myth;
   final String fact;
 
-  const _MythFactCard({
-    required this.myth,
-    required this.fact,
-  });
+  const _MythFactCard({required this.myth, required this.fact});
 
   @override
   Widget build(BuildContext context) {
@@ -964,23 +966,14 @@ class _MythFactCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(
-              myth,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(myth, style: const TextStyle(fontSize: 14, height: 1.4)),
             const SizedBox(height: 12),
             const Text(
               'Fact',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 4),
-            Text(
-              fact,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
+            Text(fact, style: const TextStyle(fontSize: 14, height: 1.4)),
           ],
         ),
       ),

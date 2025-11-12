@@ -26,8 +26,46 @@ class _CalendarScreenState extends State<CalendarScreen> {
     super.initState();
     box = Hive.box('cycleData');
     _loadData();
-    // Auto-select today's date on load
     selectedDay = DateTime.now();
+  }
+
+  void _resetHistoryData() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("⚠️ Confirm Reset"),
+        content: const Text(
+          "This will delete all your period history and reset the calendar. "
+          "Are you sure you want to continue?",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+
+              box.delete('periodLogs');
+              box.delete('lastPeriodStart');
+              box.delete('lastPeriodEnd');
+
+              setState(() {
+                periodLogs.clear();
+                lastPeriodStart = null;
+                lastPeriodEnd = null;
+                selectedDay = DateTime.now();
+                _calendarKey = UniqueKey();
+              });
+
+              _toast("🗑️ All history and calendar data have been reset");
+            },
+            child: const Text("Confirm"),
+          ),
+        ],
+      ),
+    );
   }
 
   void _loadData() {
@@ -50,7 +88,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  // 🩸 Mark Period Start
   void logPeriodStart() {
     if (selectedDay == null) {
       _toast("Select a date first 🌸");
@@ -68,14 +105,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     setState(() {
       lastPeriodStart = selectedDay;
       lastPeriodEnd = null;
-      selectedDay = DateTime.now(); // Reset to today
+      selectedDay = DateTime.now();
       _calendarKey = UniqueKey();
     });
 
     _toast("🩸 Period start logged: ${_formatDate(lastPeriodStart!)}");
   }
 
-  // 🌺 Mark Period End
   void logPeriodEnd() {
     if (selectedDay == null) {
       _toast("Select a date first 🌷");
@@ -90,7 +126,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
       return;
     }
 
-    // Validate unusually long periods (over 10 days)
     final periodLength = selectedDay!.difference(lastPeriodStart!).inDays + 1;
     if (periodLength > 10) {
       _showLongPeriodDialog(periodLength);
@@ -100,7 +135,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _completePeriodLog();
   }
 
-  // Show confirmation dialog for unusually long periods
   void _showLongPeriodDialog(int days) {
     showDialog(
       context: context,
@@ -139,14 +173,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     setState(() {
       lastPeriodEnd = selectedDay;
-      selectedDay = DateTime.now(); // Reset to today
+      selectedDay = DateTime.now();
       _calendarKey = UniqueKey();
     });
 
     _toast("✅ Period end logged: ${_formatDate(lastPeriodEnd!)}");
   }
 
-  // 🔄 Reset only calendar data (not history)
   void resetCalendarData() {
     box.delete('lastPeriodStart');
     box.delete('lastPeriodEnd');
@@ -159,7 +192,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _toast("🔄 Calendar reset successfully");
   }
 
-  // 🧮 Compute average cycle length (start to start)
   double? getAverageCycleLength() {
     if (periodLogs.length < 2) return null;
     List<int> lengths = [];
@@ -171,7 +203,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return lengths.reduce((a, b) => a + b) / lengths.length;
   }
 
-  // 🔮 Predict next period from last period start (more accurate)
   DateTime? predictNextPeriod() {
     if (periodLogs.isEmpty) return null;
     final lastLog = periodLogs.last;
@@ -180,14 +211,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return lastStart.add(Duration(days: avg.round()));
   }
 
-  // 🌼 Get current cycle day if ongoing (only for active periods)
   int? getCurrentCycleDay() {
     if (lastPeriodStart == null) return null;
-    if (lastPeriodEnd != null) return null; // No ongoing cycle
+    if (lastPeriodEnd != null) return null;
     return DateTime.now().difference(lastPeriodStart!).inDays + 1;
   }
 
-  // 🎨 Check if a day is within a period range
   bool _isPeriodDay(DateTime day) {
     for (var log in periodLogs) {
       final start = DateTime.parse(log["start"]);
@@ -198,7 +227,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
       }
     }
 
-    // Check current ongoing period
     if (lastPeriodStart != null && lastPeriodEnd == null) {
       if (day.isAfter(lastPeriodStart!.subtract(const Duration(days: 1))) &&
           day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
@@ -209,12 +237,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return false;
   }
 
-  // 🔮 Check if a day is predicted period
   bool _isPredictedPeriodDay(DateTime day) {
     final predicted = predictNextPeriod();
     if (predicted == null) return false;
 
-    // Show 5 days as predicted period
     return day.isAfter(predicted.subtract(const Duration(days: 1))) &&
         day.isBefore(predicted.add(const Duration(days: 5)));
   }
@@ -256,162 +282,231 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ],
       ),
       backgroundColor: AppColors.background,
-      body: Column(
-        children: [
-          const SizedBox(height: 10),
-          TableCalendar(
-            key: _calendarKey,
-            firstDay: DateTime.utc(2020, 1, 1),
-            lastDay: DateTime.utc(2030, 12, 31),
-            focusedDay: focusedDay,
-            selectedDayPredicate: (day) => isSameDay(selectedDay, day),
-            onDaySelected: (selected, focused) {
-              setState(() {
-                selectedDay = selected;
-                focusedDay = focused;
-              });
-            },
-            calendarStyle: CalendarStyle(
-              todayDecoration: BoxDecoration(
-                color: AppColors.accent,
-                shape: BoxShape.circle,
-              ),
-              selectedDecoration: BoxDecoration(
-                color: AppColors.primary,
-                shape: BoxShape.circle,
-              ),
-              weekendTextStyle: const TextStyle(color: Colors.pink),
-            ),
-            calendarBuilders: CalendarBuilders(
-              defaultBuilder: (context, day, focusedDay) {
-                if (_isPeriodDay(day)) {
-                  return Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.pink.shade100,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  );
-                }
-                if (_isPredictedPeriodDay(day)) {
-                  return Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.purple.shade50,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.purple.shade200,
-                        width: 2,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: TextStyle(color: Colors.purple.shade700),
-                      ),
-                    ),
-                  );
-                }
-                return null;
-              },
-            ),
-          ),
-          const SizedBox(height: 15),
-          // Legend
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLegendItem(Colors.pink.shade100, "Period Days"),
-                const SizedBox(width: 15),
-                _buildLegendItem(
-                  Colors.purple.shade50,
-                  "Predicted",
-                  borderColor: Colors.purple.shade200,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          if (lastPeriodStart != null && lastPeriodEnd == null)
-            Text(
-              "🩸 Period Start: ${_formatDate(lastPeriodStart!)}",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          if (lastPeriodStart != null && lastPeriodEnd != null)
-            Text(
-              "✅ Last Period: ${_formatDate(lastPeriodStart!)} - ${_formatDate(lastPeriodEnd!)}",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          const SizedBox(height: 10),
-          if (avgCycle != null)
-            Text(
-              "📅 Avg Cycle Length: ${avgCycle.toStringAsFixed(1)} days",
-              style: const TextStyle(fontSize: 15),
-            ),
-          if (predictedNext != null)
-            Text(
-              "🔮 Next Period: ${_formatDate(predictedNext)}",
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            ),
-          if (currentCycleDay != null)
-            Text(
-              "🌼 Current Period Day: $currentCycleDay",
-              style: const TextStyle(
-                fontSize: 15,
-                color: Colors.pink,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: [
-                ElevatedButton.icon(
-                  onPressed: logPeriodStart,
-                  icon: const Icon(Icons.favorite),
-                  label: const Text(
-                    "Mark Period Started",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(double.infinity, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                const SizedBox(height: 10),
+                TableCalendar(
+                  key: _calendarKey,
+                  firstDay: DateTime.utc(2020, 1, 1),
+                  lastDay: DateTime.utc(2030, 12, 31),
+                  focusedDay: focusedDay,
+                  selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+                  onDaySelected: (selected, focused) {
+                    setState(() {
+                      selectedDay = selected;
+                      focusedDay = focused;
+                    });
+                  },
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: AppColors.accent,
+                      shape: BoxShape.circle,
                     ),
+                    selectedDecoration: BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    weekendTextStyle: const TextStyle(color: Colors.pink),
+                  ),
+                  calendarBuilders: CalendarBuilders(
+                    defaultBuilder: (context, day, focusedDay) {
+                      if (_isPeriodDay(day)) {
+                        return Container(
+                          margin: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.pink.shade100,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${day.day}',
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        );
+                      }
+                      if (_isPredictedPeriodDay(day)) {
+                        return Container(
+                          margin: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.purple.shade50,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.purple.shade200,
+                              width: 2,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${day.day}',
+                              style: TextStyle(color: Colors.purple.shade700),
+                            ),
+                          ),
+                        );
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                const SizedBox(height: 10),
-                ElevatedButton.icon(
-                  onPressed: logPeriodEnd,
-                  icon: const Icon(Icons.favorite_border),
-                  label: const Text(
-                    "Mark Period Ended",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                const SizedBox(height: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildLegendItem(Colors.pink.shade100, "Period Days"),
+                      const SizedBox(width: 15),
+                      _buildLegendItem(
+                        Colors.purple.shade50,
+                        "Predicted",
+                        borderColor: Colors.purple.shade200,
+                      ),
+                    ],
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink.shade200,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(double.infinity, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                ),
+                const SizedBox(height: 15),
+                if (lastPeriodStart != null && lastPeriodEnd == null)
+                  Text(
+                    "🩸 Period Start: ${_formatDate(lastPeriodStart!)}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
+                  ),
+                if (lastPeriodStart != null && lastPeriodEnd != null)
+                  Text(
+                    "✅ Last Period: ${_formatDate(lastPeriodStart!)} - ${_formatDate(lastPeriodEnd!)}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+                if (avgCycle != null)
+                  Text(
+                    "📅 Avg Cycle Length: ${avgCycle.toStringAsFixed(1)} days",
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                if (predictedNext != null)
+                  Text(
+                    "🔮 Next Period: ${_formatDate(predictedNext)}",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                if (currentCycleDay != null)
+                  Text(
+                    "🌼 Current Period Day: $currentCycleDay",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.pink,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                const SizedBox(
+                  height: 20,
+                ), // ✅ Fixed: Replaced Spacer with SizedBox
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: resetCalendarData,
+                              icon: const Icon(Icons.refresh),
+                              label: const Text(
+                                "Reset Calendar",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueGrey.shade100,
+                                foregroundColor: Colors.black87,
+                                minimumSize: const Size(double.infinity, 45),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: _resetHistoryData,
+                              icon: const Icon(Icons.delete_forever),
+                              label: const Text(
+                                "Reset History",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red.shade100,
+                                foregroundColor: Colors.red.shade700,
+                                minimumSize: const Size(double.infinity, 45),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton.icon(
+                        onPressed: logPeriodStart,
+                        icon: const Icon(Icons.favorite),
+                        label: const Text(
+                          "Mark Period Started",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 55),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton.icon(
+                        onPressed: logPeriodEnd,
+                        icon: const Icon(Icons.favorite_border),
+                        label: const Text(
+                          "Mark Period Ended",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pink.shade200,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 55),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
